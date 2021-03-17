@@ -16,7 +16,7 @@ const Review = () => {
         // processOrder();
 
     }
-
+    
 
     const removeProduct = (productKey) => {
         // console.log('remove clicked', productKey);
