@@ -1,6 +1,6 @@
 
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import Header from './components/Header/Header';
 import Shop from './components/Shop/Shop';
 import {
@@ -13,11 +13,17 @@ import Review from './components/Review/Review';
 import Inventory from './components/Inventory/Inventory';
 import Notfound from './components/Notfound/Notfound';
 import Productdetail from './components/Productdetail/Productdetail';
+import Login from './components/Login/Login';
+import Shipment from './components/Shipment/Shipment';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
-function App() {
+export const UserContext = createContext();
+function App(props) {
+  const [loggedInUser, setLoggedInUser] = useState({});
 
   return (
-    <div>
+
+    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Header></Header>
 
       <Router>
@@ -31,9 +37,17 @@ function App() {
             <Review></Review>
           </Route>
 
-          <Route path="/inventory">
+          <PrivateRoute path="/inventory">
             <Inventory></Inventory>
+          </PrivateRoute>
+          
+          <Route path="/login">
+            <Login></Login>
           </Route>
+
+          <PrivateRoute path="/shipment">
+            <Shipment></Shipment>
+          </PrivateRoute>
 
           <Route exact path="/">
             <Shop></Shop>
@@ -51,7 +65,7 @@ function App() {
 
       </Router>
 
-    </div>
+    </UserContext.Provider>
   );
 }
 

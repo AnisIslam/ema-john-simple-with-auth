@@ -2,20 +2,21 @@ import React, { useEffect, useState } from 'react';
 import fakeData from '../../fakeData';
 import { getDatabaseCart, processOrder, removeFromDatabaseCart } from '../../utilities/databaseManager';
 import Reviewitem from '../Reviewitem/Reviewitem';
-import Cart from '../Cart/Cart';import happyImage from '../../images/giphy.gif'
+import Cart from '../Cart/Cart'; import happyImage from '../../images/giphy.gif'
+import { useHistory } from 'react-router';
 
 const Review = () => {
     const [cart, setCart] = useState([]);
     const [orderPlaced, setOrderPlaced] = useState(false);
-
-    const handlePlaceOrder = () => {
-
-        setCart([]);
-        setOrderPlaced(true);
-        processOrder();
+    const history = useHistory();
+    const handleProceedCheckout = () => {
+        history.push('/shipment');
+        // setCart([]);
+        // setOrderPlaced(true);
+        // processOrder();
 
     }
-    
+
 
     const removeProduct = (productKey) => {
         // console.log('remove clicked', productKey);
@@ -39,10 +40,10 @@ const Review = () => {
         console.log(cartProducts);
     }, [])
     let thankyou;
-    if(orderPlaced){
-        thankyou = <img src = {happyImage} alt=''/>
+    if (orderPlaced) {
+        thankyou = <img src={happyImage} alt='' />
 
-    } 
+    }
     return (
         <div className='twin-container'>
             <div className="product-container">
@@ -59,7 +60,7 @@ const Review = () => {
 
             <div className="cart-container">
                 <Cart cart={cart}>
-                    <button onClick={handlePlaceOrder} className='main-button'> Place Order</button>
+                    <button onClick={handleProceedCheckout} className='main-button'> Proceed Checkout</button>
                 </Cart>
             </div>
 
