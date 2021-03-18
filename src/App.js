@@ -25,7 +25,6 @@ function App(props) {
 
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Header></Header>
-
       <Router>
         <Switch>
 
